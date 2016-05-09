@@ -1,5 +1,9 @@
 package plan;
-
+/**
+ * 
+ * @author wuxb
+ *
+ */
 public class Plan {
 
 	public void excute(){

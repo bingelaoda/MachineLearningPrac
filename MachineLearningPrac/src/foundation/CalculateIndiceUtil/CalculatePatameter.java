@@ -4,9 +4,18 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
-
+/**
+ * 
+ * @author wuxb
+ *
+ */
 public class CalculatePatameter {
-
+	/**
+	 * 
+	 * @param realValue	真实值
+	 * @param predValue 预测值
+	 * @return
+	 */
 	public static double accuracy(List<Double> realValue,List<Double> predValue){
 		double mse = 0;
 		double variance = 0;

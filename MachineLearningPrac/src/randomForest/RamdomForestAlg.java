@@ -2,7 +2,6 @@ package randomForest;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import foundation.CalculateIndiceUtil.CalculatePatameter;
 import foundation.fileUtil.FileNameUtil;
 import weka.classifiers.trees.RandomForest;

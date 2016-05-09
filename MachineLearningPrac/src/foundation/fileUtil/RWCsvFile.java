@@ -6,11 +6,17 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.Writer;
 import java.util.List;
-
 import com.opencsv.CSVReader;
 import com.opencsv.CSVWriter;
+/**
+ * @author wuxb
+ */
 
 public class RWCsvFile {
+	/**
+	 * 
+	 * @param filePath 将要操作的文件的绝对路径
+	 */
 	public static void readCSV(String filePath) { 
 			try{
 				File file = new File(filePath);  
@@ -38,6 +44,10 @@ public class RWCsvFile {
 		}
 	}
 	
+	/**
+	 * 
+	 * @param filePath 将要操作的文件的绝对路径
+	 */
 	public static void writeCSV(String filePath){
 		File file = new File(filePath);
 		try {
