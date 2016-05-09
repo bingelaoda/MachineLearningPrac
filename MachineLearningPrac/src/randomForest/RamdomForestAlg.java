@@ -61,7 +61,7 @@ public class RamdomForestAlg {
       
     Instances test = null;
 	try {
-		test = DataSource.read(path+"doc\\test.csv");
+		test = DataSource.read(path+"doc\\predict.csv");
 	} catch (Exception e) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();

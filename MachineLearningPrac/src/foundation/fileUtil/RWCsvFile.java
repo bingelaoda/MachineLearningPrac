@@ -4,7 +4,9 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
+import java.io.IOException;
 import java.io.Writer;
+import java.util.ArrayList;
 import java.util.List;
 import com.opencsv.CSVReader;
 import com.opencsv.CSVWriter;
@@ -15,7 +17,7 @@ import com.opencsv.CSVWriter;
 public class RWCsvFile {
 	/**
 	 * 
-	 * @param filePath 将要操作的文件的绝对路径
+	 * @param filePath 
 	 */
 	public static void readCSV(String filePath) { 
 			try{
@@ -46,21 +48,33 @@ public class RWCsvFile {
 	
 	/**
 	 * 
-	 * @param filePath 将要操作的文件的绝对路径
+	 * @param filePath 
 	 */
-	public static void writeCSV(String filePath){
-		File file = new File(filePath);
-		try {
-			Writer writer = new FileWriter(file);  
-	        CSVWriter csvWriter = new CSVWriter(writer, ',');  
-	        String[] strs = {"abc" , "abc" , "abc"};  
-	        csvWriter.writeNext(strs);  
-	        csvWriter.close();  
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		}catch (Exception e) {
-			e.printStackTrace();
+	public  static void writeCSV(List<List<StringBuffer>> code,String file){
+		List<String[]> sl = new ArrayList<String[]>();
+		for(int m=0;m<code.size();m++){
+			String[] str = new String[8];
+			for(int n=0;n<8;n++){
+				str[n] = code.get(m).get(n).toString();
+			}
+			sl.add(str);
 		}
-        
+		
+        Writer writer = null;
+		try {
+			writer = new FileWriter(file);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}  
+        CSVWriter csvWriter = new CSVWriter(writer, ',');  
+        for(int i=0;i<sl.size();i++){
+        	csvWriter.writeNext(sl.get(i));
+        	csvWriter.flushQuietly();
+        }
+        try {
+			csvWriter.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} 
 	}
 }
