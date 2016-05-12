@@ -1,6 +1,6 @@
 package plan;
 
-import randomForest.RamdomForestAlg;
+import algorithm.RamdomForestAlg;
 
 /**
  * 
@@ -17,5 +17,4 @@ public class Plan {
 		Plan plan = new Plan();
 		plan.excute();
 	}
-	
 }
