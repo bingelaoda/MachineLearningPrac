@@ -93,6 +93,10 @@ public class EncogML {
 		} 
 	
 		public float predict(MLRegression bestMethod){
+			float predictValue = -1f;
 			
+			
+			
+			return predictValue;
 		}
 }

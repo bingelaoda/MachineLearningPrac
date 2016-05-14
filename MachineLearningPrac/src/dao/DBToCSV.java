@@ -34,14 +34,14 @@ public class DBToCSV {
 	 * @param fileds 
 	 * @param filedsTypes 
 	 */
-	public  void dbTocsv(String sqlTxt,List<String> fileds){
+	public  void dbTocsv(String sqlTxt,List<String> fileds,String fileNM){
 		try {
 			PreparedStatement prst = dbUtil.getPrepStmt(sqlTxt);
 			ResultSet rSet = prst.executeQuery();
 			List<String> codes = new ArrayList<>();
 			List<Float> restValues = new ArrayList<>();
 			while(rSet.next()){
-					String code = rSet.getString("Code");
+					String code = rSet.getString(fileds.get(0));
 					codes.add(code);
 					float restValue = rSet.getFloat(fileds.get(1));
 					restValues.add(restValue);
@@ -63,7 +63,7 @@ public class DBToCSV {
 				str.add(strrest);
 				convcode.add(str);
 			}
-			String file =prjPath+"dataSource\\restTrain.csv"; 
+			String file =prjPath+"dataSource\\"+fileNM; 
 			RWCsvFile.writeCSV(convcode, file);
 		} catch (DBException e) {
 			e.printStackTrace();
@@ -72,12 +72,48 @@ public class DBToCSV {
 		}
 	}
 	
+	public  void dbTocsv1(String sqlTxt,List<String> fileds,String fileNM){
+		try {
+			PreparedStatement prst = dbUtil.getPrepStmt(sqlTxt);
+			ResultSet rSet = prst.executeQuery();
+			List<String> codes = new ArrayList<>();
+			List<Integer> tsks = new ArrayList<>();
+			while(rSet.next()){
+					String code = rSet.getString(fileds.get(0));
+					codes.add(code);
+					int tsk = rSet.getInt(fileds.get(1));
+					tsks.add(tsk);
+			}
+			List<List<StringBuffer>> convcode = new ArrayList<List<StringBuffer>>();
+			for(int i=0;i<codes.size();i++){
+				List<StringBuffer> str = new ArrayList<>();
+				String temp = codes.get(i);
+				String[] templi = temp.split(",");
+				for(int j=0;j<templi.length;j++){
+					StringBuffer sinStr = new StringBuffer();
+					sinStr.append(templi[j]);
+					str.add(sinStr);
+				}
+				StringBuffer strrest = new StringBuffer();
+				strrest.append(tsks.get(i));
+				str.add(strrest);
+				convcode.add(str);
+			}
+			String file =prjPath+"dataSource\\"+fileNM; 
+			RWCsvFile.writeCSV(convcode, file);
+		} catch (DBException e) {
+			e.printStackTrace();
+		}catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
 	public static void main(String[] args){
-		String sqlTxt = "select * from t_run";
+		String sqlTxt = "select * from t_maxutiltsk";
 		List<String> fileds = new ArrayList<>();
-		fileds.add("Code");
-		fileds.add("RestValue");
-		new DBToCSV().dbTocsv(sqlTxt, fileds);
+		fileds.add("dofCode");
+		fileds.add("maxutiltsk");
+		String fileNM = "tskDataSource.csv";
+		new DBToCSV().dbTocsv1(sqlTxt, fileds,fileNM);
 	}
 	
 	

@@ -28,10 +28,10 @@ public class RamdomForestAlg {
 //				System.out.println(""+done(400, batchsize));
 //			}
 //		}
-	  done(200, 400);
+	  trainAndTest(200, 400);
 		  
   }
-  public static double done(int treesize,int batchsize){
+  public static double trainAndTest(int treesize,int batchsize){
 	  // load data
 	  String path = FileNameUtil.getPrjPath();
 //    BufferedReader br = null;
@@ -128,11 +128,11 @@ public class RamdomForestAlg {
 //      System.out.print(Utils.arrayToString(dist));
       System.out.println();
     }
-    double accuracy = CalculatePatameter.accuracy(realv, predv);
-    double rp = CalculatePatameter.rp(realv, predv);
+    double accuracy = CalculatePatameter.claccuracy(realv, predv);
+//    double rp = CalculatePatameter.rp(realv, predv);
     
     System.out.println("Accuracy"+accuracy);
-    System.out.println("rp"+rp);
+//    System.out.println("rp"+rp);
 //    
     return accuracy;
   }

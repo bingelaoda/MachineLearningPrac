@@ -1,5 +1,4 @@
 package foundation.fileUtil;
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -7,7 +6,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
-
 import jxl.*;
 import jxl.format.UnderlineStyle;
 import jxl.read.biff.BiffException;
@@ -80,10 +78,16 @@ public class RWExcelFile {
 	            	throw new RuntimeException ("要找的列数不存在");
 	            }
 	            //获取指定单元格的对象引用   
+	            String text="";
 	            for (int i = 0; i < rsRows; i++)   
 	            {   
-                    Cell cell = st.getCell(ColumnIndex-1, i);   
-                    dataSet.add(cell.getContents());
+                    Cell cell = st.getCell(ColumnIndex-1, i);
+                    if(cell.getType() == CellType.NUMBER){
+                    	 NumberCell numberCell = (NumberCell) cell; 
+                    	 double value =numberCell.getValue();
+                    	 text = value + "";
+                    	   }
+                    dataSet.add(text);
 	            }             
 	            //关闭   
 	            rwb.close();   
@@ -249,12 +253,9 @@ public class RWExcelFile {
 						} catch (WriteException e) {
 							e.printStackTrace();
 						}
-
 					}
-
 				}
 			}
-
 			try {
 				// 从内存中写入文件中
 				wwb.write();
@@ -298,10 +299,8 @@ public class RWExcelFile {
 					}
 					ws.setRowView(10, 1200);
 				} catch (RowsExceededException e2) {
-
 					e2.printStackTrace();
 				}
-
 				WritableFont wf = new WritableFont(WritableFont.TIMES, 12,
 						WritableFont.BOLD, false, UnderlineStyle.NO_UNDERLINE,
 						jxl.format.Colour.CORAL); // 定义格式 字体 下划线 斜体 粗体 颜色
@@ -334,12 +333,9 @@ public class RWExcelFile {
 						} catch (WriteException e) {
 							e.printStackTrace();
 						}
-
 					}
-
 				}
 			}
-
 			try {
 				// 从内存中写入文件中
 				wwb.write();
@@ -353,7 +349,8 @@ public class RWExcelFile {
 		}
 	 
 	 public static void main(String[] args){
-		 readjxldefineColumn("D:\\a.xls","Sheet1",1);
-//		 readjxldefineRow("D:\\a.xls","Sheet1",1);
+		 List<String > list = readjxldefineColumn("D:\\a.xls","Sheet1",1);
+		 System.out.println(list);
+		 //		 readjxldefineRow("D:\\a.xls","Sheet1",1);
 	 }
 }

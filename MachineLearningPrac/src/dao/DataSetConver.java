@@ -35,6 +35,13 @@ public class DataSetConver {
 		}
 		return afData;
 	}
+	public static String[] dataSetConver2(String code){
+		code = code.trim();
+		code = code.substring(1, code.length()-1);
+		String[] codes = code.split(",");
+		return codes;
+	}
+	
 	
 	public static void main(String[] args){
 		String code = "[5.5801563, 7.73964, 3.5319653, server3, server3, server3, QuickBooking]";

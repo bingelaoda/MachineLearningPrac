@@ -53,8 +53,8 @@ public class RWCsvFile {
 	public  static void writeCSV(List<List<StringBuffer>> code,String file){
 		List<String[]> sl = new ArrayList<String[]>();
 		for(int m=0;m<code.size();m++){
-			String[] str = new String[8];
-			for(int n=0;n<8;n++){
+			String[] str = new String[code.get(m).size()];
+			for(int n=0;n<code.get(m).size();n++){
 				str[n] = code.get(m).get(n).toString();
 			}
 			sl.add(str);

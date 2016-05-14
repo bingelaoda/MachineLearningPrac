@@ -10,7 +10,7 @@ import algorithm.RamdomForestAlg;
 public class Plan {
 
 	public void excute(){
-		RamdomForestAlg.done(100, 70);
+		RamdomForestAlg.trainAndTest(100, 70);
 	}
 	
 	public static void main(String[] args){
