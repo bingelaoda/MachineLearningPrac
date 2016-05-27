@@ -48,10 +48,13 @@ public class RWCsvFile {
 	
 	/**
 	 * 
-	 * @param filePath 
+	 * @param code	将自由度按照每一维都作为一个学习cell
+	 * @param attrs 根据自由度的长度给机器学习的数据表，csv文件设置表头
+	 * @param file  csv文件的存储路径
 	 */
-	public  static void writeCSV(List<List<StringBuffer>> code,String file){
+	public  static void writeCSV(List<List<StringBuffer>> code,String[] attrs,String file){
 		List<String[]> sl = new ArrayList<String[]>();
+		sl.add(attrs);
 		for(int m=0;m<code.size();m++){
 			String[] str = new String[code.get(m).size()];
 			for(int n=0;n<code.get(m).size();n++){

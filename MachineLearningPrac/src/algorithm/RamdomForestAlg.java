@@ -20,17 +20,6 @@ public class RamdomForestAlg {
    * @throws Exception	if something goes wrong
    */
 	
-  public static void main(String[] args) throws Exception {
-//		  for(int j=0;j<20;j++){
-//			int batchsize = 10*j;
-//			
-//			if(done(400, batchsize)>0){
-//				System.out.println(""+done(400, batchsize));
-//			}
-//		}
-	  trainAndTest(200, 400);
-		  
-  }
   public static double trainAndTest(int treesize,int batchsize){
 	  // load data
 	  String path = FileNameUtil.getPrjPath();
