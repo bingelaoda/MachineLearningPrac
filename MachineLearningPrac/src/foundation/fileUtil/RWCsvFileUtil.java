@@ -80,4 +80,60 @@ public class RWCsvFileUtil {
 			e.printStackTrace();
 		} 
 	}
+	
+	public static void gainCSVSub(String srcFilePath,String desFilePath,int index1,int index2, int dimension){
+		File file = new File(srcFilePath);  
+        FileReader fReader = null;
+		try {
+			fReader = new FileReader(file);
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}  
+        CSVReader csvReader = new CSVReader(fReader);  
+        String[] strs=null;
+		try {
+			strs = csvReader.readNext();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}  
+//        if(strs != null && strs.length > 0){  
+//            for(String str : strs)  
+//                if(null != str && !str.equals(""))  
+//                    System.out.print(str + " , ");  
+//            System.out.println("\n---------------");  
+//        }  
+        List<String[]> list=null;
+		try {
+			list = csvReader.readAll();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		List<List<StringBuffer>> codes = new ArrayList<List<StringBuffer>>();
+		
+        for(int i=0;i<list.size();i++){
+        	List<StringBuffer> code = new ArrayList<>();
+        	StringBuffer strb = null;
+            for(int j=0;j<list.get(0).length;j++) { 
+            	strb = new StringBuffer();
+				strb.append(list.get(i)[j]);
+				}
+        }
+        
+        String[] attrs = new String[dimension];
+		for(int i=0;i<dimension;i++){
+			attrs[i] = "Column"+(i+1);
+		}
+        
+        writeCSV(codes, strs, desFilePath);
+        try {
+			csvReader.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}  
+	} 
 }
