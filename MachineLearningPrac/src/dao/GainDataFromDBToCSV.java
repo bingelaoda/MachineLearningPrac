@@ -10,29 +10,30 @@ import foundation.dbUtil.DBException;
 import foundation.dbUtil.DBUtil;
 import foundation.fileUtil.FileNameUtil;
 import foundation.fileUtil.RWCsvFile;
-/**
- * 
+/**在demo环境下测试不同的机器学习方法对于不同案例产生的效果，构造训练以及
+ * 测试数据，从已有的数据库中，到出成csv文件
  * @author wuxb
  *
  */
-public class DBToCSV {
+public class GainDataFromDBToCSV {
 	private String dbCfgFileName = "";
 	private DBUtil dbUtil=null;
 	String prjPath = FileNameUtil.getPrjPath();
-	public DBToCSV(){
+	
+	public GainDataFromDBToCSV(){
 		dbCfgFileName = "src/foundation/dbUtil/dbConf.properties";
 		dbUtil = DBUtil.getInstance(dbCfgFileName);
 	}
 	
-	public DBToCSV(String dbCfgFileName){
+	public GainDataFromDBToCSV(String dbCfgFileName){
 		this.dbCfgFileName = dbCfgFileName;
 		dbUtil = DBUtil.getInstance(dbCfgFileName);
 	}
+	
 	/**
-	 * 
-	 * @param sqlTxt 
-	 * @param fileds 
-	 * @param filedsTypes 
+	 * @param sqlTxt 从数据库中查询数据的语句
+	 * @param fileds 需要的数据库的字段名
+	 * @param filedsTypes 相应的字段类型
 	 */
 	public  void dbTocsv(String sqlTxt,List<String> fileds,String fileNM){
 		try {

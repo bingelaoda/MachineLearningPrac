@@ -91,12 +91,4 @@ public class EncogML {
 			bestMethod = (MLRegression)model.crossvalidate(5, true);
 			return bestMethod;
 		} 
-	
-		public float predict(MLRegression bestMethod){
-			float predictValue = -1f;
-			
-			
-			
-			return predictValue;
-		}
 }
