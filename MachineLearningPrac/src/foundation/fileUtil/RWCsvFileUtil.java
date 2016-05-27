@@ -14,7 +14,7 @@ import com.opencsv.CSVWriter;
  * @author wuxb
  */
 
-public class RWCsvFile {
+public class RWCsvFileUtil {
 	/**
 	 * 
 	 * @param filePath 

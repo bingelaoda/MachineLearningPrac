@@ -1,8 +1,13 @@
 package algorithm;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import org.encog.ConsoleStatusReportable;
 import org.encog.ml.MLRegression;
+import org.encog.ml.data.MLData;
 import org.encog.ml.data.versatile.NormalizationHelper;
 import org.encog.ml.data.versatile.VersatileMLDataSet;
 import org.encog.ml.data.versatile.columns.ColumnDefinition;
@@ -12,7 +17,9 @@ import org.encog.ml.data.versatile.sources.VersatileDataSource;
 import org.encog.ml.factory.MLMethodFactory;
 import org.encog.ml.model.EncogModel;
 import org.encog.util.csv.CSVFormat;
+import org.encog.util.csv.ReadCSV;
 
+import foundation.CalculateIndiceUtil.CalculatePatameter;
 
 public class EncogML {
 	
@@ -46,12 +53,12 @@ public class EncogML {
 			data.defineSourceColumn("6", 5, ColumnType.continuous);
 			data.defineSourceColumn("7", 6, ColumnType.continuous);
 			data.defineSourceColumn("8", 7, ColumnType.continuous);
-//			data.defineSourceColumn("9", 8, ColumnType.continuous);
-//			data.defineSourceColumn("10", 9, ColumnType.continuous);
-//			data.defineSourceColumn("11", 10, ColumnType.continuous);
-//			data.defineSourceColumn("12", 11, ColumnType.continuous);
-//			data.defineSourceColumn("13", 12, ColumnType.continuous);
-//			data.defineSourceColumn("14", 13, ColumnType.continuous);
+			data.defineSourceColumn("9", 8, ColumnType.continuous);
+			data.defineSourceColumn("10", 9, ColumnType.continuous);
+			data.defineSourceColumn("11", 10, ColumnType.continuous);
+			data.defineSourceColumn("12", 11, ColumnType.continuous);
+			data.defineSourceColumn("13", 12, ColumnType.continuous);
+			data.defineSourceColumn("14", 13, ColumnType.continuous);
 			// Define the column that we are trying to predict.
 			ColumnDefinition outputColumn = data.defineSourceColumn("species", 8,
 					ColumnType.nominal);
@@ -70,7 +77,7 @@ public class EncogML {
 			// MLMethodFactor.TYPE_NEAT: NEAT Neural Network
 			// MLMethodFactor.TYPE_PNN: Probabilistic Neural Network
 			EncogModel model = new EncogModel(data);
-			model.selectMethod(data, MLMethodFactory.TYPE_FEEDFORWARD);
+			model.selectMethod(data, MLMethodFactory.TYPE_SVM);
 			
 			// Send any output to the console.
 			model.setReport(new ConsoleStatusReportable());
@@ -90,5 +97,41 @@ public class EncogML {
 			// Use a 5-fold cross-validated train.  Return the best method found.
 			bestMethod = (MLRegression)model.crossvalidate(5, true);
 			return bestMethod;
-		} 
+		}
+	
+	public double trainAndTest(ReadCSV csv,MLRegression bestMethod){
+		String[] line = new String[14];
+		MLData input = helper.allocateInputVector();
+		String irisChosen = "";
+		 List<Double> realv = new ArrayList<>();
+		 List<Double> predv = new ArrayList<>();
+		while (csv.next()) {
+			StringBuilder result = new StringBuilder();
+			for (int i = 0; i < 14; i++) {
+				line[i] = csv.get(i);
+			}
+			String correct = csv.get(14);
+			realv.add(Double.parseDouble(correct));
+			helper.normalizeInputVector(line, input.getData(), false);
+			MLData output = bestMethod.compute(input);
+			irisChosen = helper.denormalizeOutputVectorToString(output)[0];
+			predv.add(Double.parseDouble(irisChosen));
+			result.append(Arrays.toString(line));
+			result.append(" -> predicted: ");
+			result.append(irisChosen);
+			result.append(")");
+		}
+	
+		double rp = CalculatePatameter.rp(realv, predv);
+		    
+	    return rp;
+		
+	}
+	
+	public static void main(String[] args) {
+		
+		EncogML prg = new EncogML();
+		File irisFile1 = new File("D:", "test1.csv");
+		ReadCSV csv = new ReadCSV(irisFile1, false, CSVFormat.DECIMAL_POINT);
+	}
 }

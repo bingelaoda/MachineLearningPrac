@@ -9,7 +9,7 @@ import java.util.List;
 import foundation.dbUtil.DBException;
 import foundation.dbUtil.DBUtil;
 import foundation.fileUtil.FileNameUtil;
-import foundation.fileUtil.RWCsvFile;
+import foundation.fileUtil.RWCsvFileUtil;
 /**在demo环境下测试不同的机器学习方法对于不同案例产生的效果，构造训练以及
  * 测试数据，从已有的数据库中，到出成csv文件
  * @author wuxb
@@ -78,7 +78,7 @@ public class GainDataFromDBToCSV {
 			/*
 			 *将数据写到制定的csv文件
 			 */
-			RWCsvFile.writeCSV(rlts, attrs,desCSVFilePath);
+			RWCsvFileUtil.writeCSV(rlts, attrs,desCSVFilePath);
 		} catch (DBException e) {
 			e.printStackTrace();
 		}catch (SQLException e) {

@@ -5,6 +5,7 @@ import java.util.List;
 import foundation.CalculateIndiceUtil.CalculatePatameter;
 import foundation.fileUtil.FileNameUtil;
 import weka.classifiers.trees.RandomForest;
+import weka.core.Instance;
 import weka.core.Instances;
 import weka.core.converters.ConverterUtils.DataSource;
 
@@ -20,7 +21,7 @@ public class RamdomForestAlg {
    * @throws Exception	if something goes wrong
    */
 	
-  public static double trainAndTest(int treesize,int batchsize){
+  public   double trainAndTest(int treesize,int batchsize,int trainIndex2,int startTestIndex,int endTestIndex){
 	  // load data
 	  String path = FileNameUtil.getPrjPath();
 //    BufferedReader br = null;
@@ -31,12 +32,27 @@ public class RamdomForestAlg {
 //	  Instances trainData = new Instances(br);
       Instances trainData = null;
 	try {
-		trainData = DataSource.read(path+"dataSource\\train.csv");
+		trainData = DataSource.read(path+"dataSource\\stePCMData.csv");
 	} catch (Exception e) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
 	}
-      trainData.setClassIndex(trainData.numAttributes() - 1);
+	trainData.setClassIndex(trainData.numAttributes() - 1);
+	for (int i = trainIndex2; i < trainData.size(); i++) {
+		trainData.delete(i);
+		i--;
+	}
+	
+//	for(int i = 0;i<trainIndex1;i++){
+//		trainData.delete(i);
+//		i--;
+//	}
+	while(trainData.size()>400){
+		trainData.delete(0);
+	}
+	
+	
+	
       
 //      br.close();
 //    Instances train = DataSource.read(args[0]);
@@ -48,41 +64,45 @@ public class RamdomForestAlg {
 //    Instances test = DataSource.read(path+"doc\\maxUtilSvrTest.csv");
 //    Instances test = DataSource.read(path+"doc\\respTimeTest.csv");
       
-    Instances test = null;
+    Instances testData = null;
 	try {
-		test = DataSource.read(path+"dataSource\\predict.csv");
+		testData = DataSource.read(path+"dataSource\\stePCMData.csv");
 	} catch (Exception e) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
 	}
-    test.setClassIndex(test.numAttributes() - 1);
+	testData.setClassIndex(testData.numAttributes() - 1);
     
-    if (!trainData.equalHeaders(test))
+	
+  /*  if (!trainData.equalHeaders(test))
       throw new IllegalArgumentException(
-	  "Train and test set are not compatible: " + trainData.equalHeadersMsg(test));
+	  "Train and test set are not compatible: " + trainData.equalHeadersMsg(test));*/
     
     // train classifier
     RandomForest rf = new RandomForest();
     rf.setNumTrees(treesize);
     rf.setBatchSize(""+batchsize);
     rf.setNumDecimalPlaces(10);
+    
     try {
 		rf.buildClassifier(trainData);
 	} catch (Exception e) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
 	}
-    
+//    System.out.println("testData.size() = "+testData.size());
     // output predictions
 //    System.out.println("# - actual - predicted - error - distribution");
 //  int num=0;
     List<Double> realv = new ArrayList<>();
     List<Double> predv = new ArrayList<>();
-    for (int i = 0; i < test.numInstances(); i++) {
-    	double real = Double.parseDouble(test.instance(i).toString(test.classIndex()));
+    int num = 0;
+    for (int i =startTestIndex ; i < endTestIndex; i++) {
+    	num++;
+    	double real = Double.parseDouble(testData.instance(i).toString(testData.classIndex()));
     	double pred=0;
 		try {
-			pred = rf.classifyInstance(test.instance(i));
+			pred = rf.classifyInstance(testData.instance(i));
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -90,7 +110,7 @@ public class RamdomForestAlg {
     	realv.add(real);
     	predv.add(pred);
       
-      System.out.println("pred "+pred+"actual "+real);
+//      System.out.println("pred "+pred+"actual "+real);
 //      double[] dist = rf.distributionForInstance(test.instance(i));
 
 //      System.out.print((i+1));
@@ -115,15 +135,18 @@ public class RamdomForestAlg {
 //	System.out.print("no");
 //      System.out.print(" - ");
 //      System.out.print(Utils.arrayToString(dist));
-      System.out.println();
+//      System.out.println();
     }
-    double accuracy = CalculatePatameter.claccuracy(realv, predv);
-//    double rp = CalculatePatameter.rp(realv, predv);
     
-    System.out.println("Accuracy"+accuracy);
-//    System.out.println("rp"+rp);
+//    System.out.println("num = "+num);
+//    double accuracy = CalculatePatameter.claccuracy(realv, predv);
+    double rp = CalculatePatameter.rp(realv, predv);
+    
+//    System.out.println("Accuracy"+accuracy);
 //    
-    return accuracy;
+    return rp;
   }
+  
+
   
 }
