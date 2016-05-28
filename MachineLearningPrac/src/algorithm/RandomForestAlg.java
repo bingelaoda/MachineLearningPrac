@@ -12,7 +12,7 @@ import weka.core.converters.ConverterUtils.DataSource;
  * This example class trains a Random Forest classifier on a dataset and outputs for 
  * a second dataset.	
  */
-public class RamdomForestAlg {
+public class RandomForestAlg {
 	
   /**
    * Expects two parameters: training file and test file.
@@ -20,7 +20,7 @@ public class RamdomForestAlg {
    * @throws Exception	if something goes wrong
    */
 	
-  public   double trainAndTest(int treesize,int batchsize,int trainIndex2,int startTestIndex,int endTestIndex){
+  public   double trainAndTest(int treesize,int batchsize,int trainIndex2,int startTestIndex,int endTestIndex,String algNM){
 	  // load data
 	  String path = FileNameUtil.getPrjPath();
 //    BufferedReader br = null;
@@ -31,7 +31,7 @@ public class RamdomForestAlg {
 //	  Instances trainData = new Instances(br);
       Instances trainData = null;
 	try {
-		trainData = DataSource.read(path+"dataSource\\stePCMData.csv");
+		trainData = DataSource.read(path+"dataSource\\"+algNM+"PCMData.csv");
 	} catch (Exception e) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
@@ -65,7 +65,7 @@ public class RamdomForestAlg {
       
     Instances testData = null;
 	try {
-		testData = DataSource.read(path+"dataSource\\stePCMData.csv");
+		testData = DataSource.read(path+"dataSource\\"+algNM+"PCMData.csv");
 	} catch (Exception e) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
