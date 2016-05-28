@@ -46,7 +46,7 @@ public class EncogML {
 					CSVFormat.DECIMAL_POINT);
 			VersatileMLDataSet data = new VersatileMLDataSet(source);
 			
-			for(int i=0;i<dimension;i++){
+			for(int i=0;i<dimension-1;i++){
 				data.defineSourceColumn(""+(i+1), i, ColumnType.continuous);
 			}
 		/*	data.defineSourceColumn("1", 0, ColumnType.continuous);
@@ -64,7 +64,7 @@ public class EncogML {
 			data.defineSourceColumn("13", 12, ColumnType.continuous);
 			data.defineSourceColumn("14", 13, ColumnType.continuous);*/
 			// Define the column that we are trying to predict.
-			ColumnDefinition outputColumn = data.defineSourceColumn("species", dimension,
+			ColumnDefinition outputColumn = data.defineSourceColumn("species", dimension-1,
 					ColumnType.continuous);
 			
 			// Analyze the data, determine the min/max/mean/sd of every column.
@@ -81,7 +81,7 @@ public class EncogML {
 			// MLMethodFactor.TYPE_NEAT: NEAT Neural Network
 			// MLMethodFactor.TYPE_PNN: Probabilistic Neural Network
 			EncogModel model = new EncogModel(data);
-			model.selectMethod(data, MLMethodFactory.TYPE_SVM);
+			model.selectMethod(data, MLMethodFactory.TYPE_SOM);
 			
 			// Send any output to the console.
 			model.setReport(new ConsoleStatusReportable());
@@ -100,11 +100,12 @@ public class EncogML {
 			
 			// Use a 5-fold cross-validated train.  Return the best method found.
 			bestMethod = (MLRegression)model.crossvalidate(5, true);
+			helper = data.getNormHelper();
 			return bestMethod;
 		}
 	
 	public double trainAndTest(ReadCSV csv,MLRegression bestMethod,int index1,int index2, int dimension){
-		String[] line = new String[14];
+		String[] line = new String[dimension-1];
 		MLData input = helper.allocateInputVector();
 		String irisChosen = "";
 		List<Double> realv = new ArrayList<>();
@@ -118,10 +119,10 @@ public class EncogML {
 			}
 				
 			StringBuilder result = new StringBuilder();
-			for (int i = 0; i < 14; i++) {
+			for (int i = 0; i < dimension-1; i++) {
 				line[i] = csv.get(i);
 			}
-			String correct = csv.get(14);
+			String correct = csv.get(dimension-1);
 			realv.add(Double.parseDouble(correct));
 			helper.normalizeInputVector(line, input.getData(), false);
 			MLData output = bestMethod.compute(input);
@@ -131,6 +132,7 @@ public class EncogML {
 			result.append(" -> predicted: ");
 			result.append(irisChosen);
 			result.append(")");
+			System.out.println("correct ="+correct+"predict = "+irisChosen);
 		}
 	
 		double rp = CalculatePatameter.rp(realv, predv);

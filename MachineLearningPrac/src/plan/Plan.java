@@ -23,10 +23,17 @@ public class Plan {
 		
 		List<Double> rfs = new ArrayList<>();
 		for(int i=0;i<10;i++){
+//			String algNM = "jssbrs";
+//			int dimension = 15;
+//			String algNM = "ms";
+//			int dimension = 14;
+//			String algNM = "pcs";
+//			int dimension = 18;
 			String algNM = "ste";
+			int dimension = 8;
 			int index1 = 600*i;
 			int index2 = 600*i+400;
-			int dimension = 8;
+			
 			RWCsvFileUtil.preparedForEncogMLCSV(algNM, index1, index2, dimension);
 			String path = FileNameUtil.getPrjPath();
 			File testCSV = new File(path+"dataSource\\"+algNM+"PCMData.csv");
