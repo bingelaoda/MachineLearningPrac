@@ -137,7 +137,7 @@ public class RandomForestAlg {
     
 //    System.out.println("num = "+num);
 //    double accuracy = CalculatePatameter.claccuracy(realv, predv);
-    double rp = CalculatePatameter.rp(realv, predv);
+    double rp = CalculatePatameter.accuracy(realv, predv);
     
 //    System.out.println("Accuracy"+accuracy);
 //    
