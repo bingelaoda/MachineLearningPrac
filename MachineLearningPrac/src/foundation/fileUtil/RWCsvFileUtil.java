@@ -54,7 +54,7 @@ public class RWCsvFileUtil {
 	 */
 	public  static void writeCSV(List<List<StringBuffer>> code,String[] attrs,String file){
 		List<String[]> sl = new ArrayList<String[]>();
-		sl.add(attrs);
+//		sl.add(attrs);
 		for(int m=0;m<code.size();m++){
 			String[] str = new String[code.get(m).size()];
 			for(int n=0;n<code.get(m).size();n++){
@@ -87,7 +87,6 @@ public class RWCsvFileUtil {
 		try {
 			fReader = new FileReader(file);
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}  
         CSVReader csvReader = new CSVReader(fReader);  
@@ -95,15 +94,8 @@ public class RWCsvFileUtil {
 		try {
 			strs = csvReader.readNext();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}  
-//        if(strs != null && strs.length > 0){  
-//            for(String str : strs)  
-//                if(null != str && !str.equals(""))  
-//                    System.out.print(str + " , ");  
-//            System.out.println("\n---------------");  
-//        }  
         List<String[]> list=null;
 		try {
 			list = csvReader.readAll();
@@ -113,14 +105,15 @@ public class RWCsvFileUtil {
 		}
 		
 		List<List<StringBuffer>> codes = new ArrayList<List<StringBuffer>>();
-		
-        for(int i=0;i<list.size();i++){
+        for(int i=index1;i<index2;i++){
         	List<StringBuffer> code = new ArrayList<>();
         	StringBuffer strb = null;
             for(int j=0;j<list.get(0).length;j++) { 
             	strb = new StringBuffer();
 				strb.append(list.get(i)[j]);
-				}
+				code.add(strb);
+			}
+            codes.add(code);
         }
         
         String[] attrs = new String[dimension];
@@ -132,8 +125,14 @@ public class RWCsvFileUtil {
         try {
 			csvReader.close();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}  
 	} 
+	
+	public static void preparedForEncogMLCSV(String algNM,int index1,int index2,int dimension){
+		String path = FileNameUtil.getPrjPath();
+		String srcFilePath = path+"dataSource\\"+algNM+"PCMData.csv";
+		String desFilePath = path+"dataSource\\"+algNM+"PCMEncogTrainData.csv";
+		gainCSVSub(srcFilePath, desFilePath, index1, index2, dimension);
+	}
 }

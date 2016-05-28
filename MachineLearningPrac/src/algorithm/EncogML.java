@@ -36,7 +36,7 @@ public class EncogML {
 		this.helper = helper;
 	}
 
-	public MLRegression  train(String filePath) {
+	public MLRegression  train(String filePath,int dimension) {
 			MLRegression bestMethod = null;
 			File irisFile = new File(filePath);
 			// Define the format of the data file.
@@ -45,7 +45,11 @@ public class EncogML {
 			VersatileDataSource source = new CSVDataSource(irisFile, false,
 					CSVFormat.DECIMAL_POINT);
 			VersatileMLDataSet data = new VersatileMLDataSet(source);
-			data.defineSourceColumn("1", 0, ColumnType.continuous);
+			
+			for(int i=0;i<dimension;i++){
+				data.defineSourceColumn(""+(i+1), i, ColumnType.continuous);
+			}
+		/*	data.defineSourceColumn("1", 0, ColumnType.continuous);
 			data.defineSourceColumn("2", 1, ColumnType.continuous);
 			data.defineSourceColumn("3", 2, ColumnType.continuous);
 			data.defineSourceColumn("4", 3, ColumnType.continuous);
@@ -58,10 +62,10 @@ public class EncogML {
 			data.defineSourceColumn("11", 10, ColumnType.continuous);
 			data.defineSourceColumn("12", 11, ColumnType.continuous);
 			data.defineSourceColumn("13", 12, ColumnType.continuous);
-			data.defineSourceColumn("14", 13, ColumnType.continuous);
+			data.defineSourceColumn("14", 13, ColumnType.continuous);*/
 			// Define the column that we are trying to predict.
-			ColumnDefinition outputColumn = data.defineSourceColumn("species", 8,
-					ColumnType.nominal);
+			ColumnDefinition outputColumn = data.defineSourceColumn("species", dimension,
+					ColumnType.continuous);
 			
 			// Analyze the data, determine the min/max/mean/sd of every column.
 			data.analyze();
@@ -99,13 +103,20 @@ public class EncogML {
 			return bestMethod;
 		}
 	
-	public double trainAndTest(ReadCSV csv,MLRegression bestMethod){
+	public double trainAndTest(ReadCSV csv,MLRegression bestMethod,int index1,int index2, int dimension){
 		String[] line = new String[14];
 		MLData input = helper.allocateInputVector();
 		String irisChosen = "";
-		 List<Double> realv = new ArrayList<>();
-		 List<Double> predv = new ArrayList<>();
+		List<Double> realv = new ArrayList<>();
+		List<Double> predv = new ArrayList<>();
+		int cursor = 0;
+		csv.next();
 		while (csv.next()) {
+			cursor++;
+			if(cursor<index1||cursor>index2){
+				continue;
+			}
+				
 			StringBuilder result = new StringBuilder();
 			for (int i = 0; i < 14; i++) {
 				line[i] = csv.get(i);
@@ -130,8 +141,8 @@ public class EncogML {
 	
 	public static void main(String[] args) {
 		
-		EncogML prg = new EncogML();
-		File irisFile1 = new File("D:", "test1.csv");
-		ReadCSV csv = new ReadCSV(irisFile1, false, CSVFormat.DECIMAL_POINT);
+//		EncogML prg = new EncogML();
+//		File irisFile1 = new File("D:", "test1.csv");
+//		ReadCSV csv = new ReadCSV(irisFile1, false, CSVFormat.DECIMAL_POINT);
 	}
 }

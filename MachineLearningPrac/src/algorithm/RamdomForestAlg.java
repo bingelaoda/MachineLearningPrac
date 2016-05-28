@@ -5,7 +5,6 @@ import java.util.List;
 import foundation.CalculateIndiceUtil.CalculatePatameter;
 import foundation.fileUtil.FileNameUtil;
 import weka.classifiers.trees.RandomForest;
-import weka.core.Instance;
 import weka.core.Instances;
 import weka.core.converters.ConverterUtils.DataSource;
 
@@ -96,9 +95,7 @@ public class RamdomForestAlg {
 //  int num=0;
     List<Double> realv = new ArrayList<>();
     List<Double> predv = new ArrayList<>();
-    int num = 0;
     for (int i =startTestIndex ; i < endTestIndex; i++) {
-    	num++;
     	double real = Double.parseDouble(testData.instance(i).toString(testData.classIndex()));
     	double pred=0;
 		try {
