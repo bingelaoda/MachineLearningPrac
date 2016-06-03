@@ -2,8 +2,12 @@ package algorithm;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import foundation.CalculateIndiceUtil.CalculatePatameter;
 import foundation.fileUtil.FileNameUtil;
+import weka.classifiers.functions.RBFNetwork;
+import weka.classifiers.functions.supportVector.RegSMO;
+import weka.classifiers.functions.supportVector.RegSMOImproved;
 import weka.classifiers.trees.RandomForest;
 import weka.core.Instances;
 import weka.core.converters.ConverterUtils.DataSource;
@@ -78,10 +82,10 @@ public class RandomForestAlg {
 	  "Train and test set are not compatible: " + trainData.equalHeadersMsg(test));*/
     
     // train classifier
-    RandomForest rf = new RandomForest();
-    rf.setNumTrees(treesize);
-    rf.setBatchSize(""+batchsize);
-    rf.setNumDecimalPlaces(10);
+    RegSMO rf = new RegSMO();
+//    rf.setNumTrees(treesize);
+//    rf.setBatchSize(""+batchsize);
+//    rf.setNumDecimalPlaces(10);
     
     try {
 		rf.buildClassifier(trainData);
@@ -137,7 +141,7 @@ public class RandomForestAlg {
     
 //    System.out.println("num = "+num);
 //    double accuracy = CalculatePatameter.claccuracy(realv, predv);
-    double rp = CalculatePatameter.accuracy(realv, predv);
+    double rp = CalculatePatameter.rp(realv, predv);
     
 //    System.out.println("Accuracy"+accuracy);
 //    
