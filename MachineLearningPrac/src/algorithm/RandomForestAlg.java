@@ -35,7 +35,7 @@ public class RandomForestAlg {
 //	  Instances trainData = new Instances(br);
       Instances trainData = null;
 	try {
-		trainData = DataSource.read(path+"dataSource\\"+algNM+"PCMData.csv");
+		trainData = DataSource.read(path+"dataSource\\"+algNM+".csv");
 	} catch (Exception e) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
@@ -69,7 +69,7 @@ public class RandomForestAlg {
       
     Instances testData = null;
 	try {
-		testData = DataSource.read(path+"dataSource\\"+algNM+"PCMData.csv");
+		testData = DataSource.read(path+"dataSource\\"+algNM+".csv");
 	} catch (Exception e) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
@@ -82,7 +82,7 @@ public class RandomForestAlg {
 	  "Train and test set are not compatible: " + trainData.equalHeadersMsg(test));*/
     
     // train classifier
-    RegSMO rf = new RegSMO();
+    RandomForest rf = new RandomForest();
 //    rf.setNumTrees(treesize);
 //    rf.setBatchSize(""+batchsize);
 //    rf.setNumDecimalPlaces(10);
@@ -140,7 +140,7 @@ public class RandomForestAlg {
     }
     
 //    System.out.println("num = "+num);
-//    double accuracy = CalculatePatameter.claccuracy(realv, predv);
+//    double accuracy = CalculatePatameter.accuracy(realv, predv);
     double rp = CalculatePatameter.rp(realv, predv);
     
 //    System.out.println("Accuracy"+accuracy);

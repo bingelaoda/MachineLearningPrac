@@ -131,7 +131,7 @@ public class RWCsvFileUtil {
 	
 	public static void preparedForEncogMLCSV(String algNM,int index1,int index2,int dimension){
 		String path = FileNameUtil.getPrjPath();
-		String srcFilePath = path+"dataSource\\"+algNM+"PCMData.csv";
+		String srcFilePath = path+"dataSource\\"+algNM+".csv";
 		String desFilePath = path+"dataSource\\"+algNM+"PCMEncogTrainData.csv";
 		gainCSVSub(srcFilePath, desFilePath, index1, index2, dimension);
 	}

@@ -57,16 +57,76 @@ public class DataSetConver {
 			case "server1":
 				modifyCode[i] = "1";
 				break;
+			case "Server1":
+				modifyCode[i] = "1";
+				break;
+			case "Server2":
+				modifyCode[i] = "2";
+				break;
+			case "Server3":
+				modifyCode[i] = "3";
+				break;
 			case "server2":
+				modifyCode[i] = "2";
+			case "Server4":
+				modifyCode[i] = "4";
+				break;
+			case "Server3-2":
+				modifyCode[i] = "5";
+				break;
+			case "S4":
+				modifyCode[i] = "1";
+				break;
+			case "QuickBooking":
+				modifyCode[i] = "1";
+				break;
+			case "BookingSystem":
+				modifyCode[i] = "2";
+				break;
+				
+			case "S4-2":
 				modifyCode[i] = "2";
 				break;
 			case "server3":
 				modifyCode[i] = "3";
 				break;
-			case "BookingSystem":
+			case "server4":
+				modifyCode[i] = "4";
+				break;
+			case "WebServer":
 				modifyCode[i] = "1";
 				break;
-			case "QuickBooking":
+			case "WebServer2":
+				modifyCode[i] = "2";
+				break;
+			case "WebServer3":
+				modifyCode[i] = "3";
+				break;
+			case "ApplicationServer":
+				modifyCode[i] = "1";
+				break;
+			case "DBServerMain":
+				modifyCode[i] = "2";
+				break;
+			case "DBServerBackup":
+				modifyCode[i] = "3";
+				break;
+			case "UserInteraction":
+				modifyCode[i] = "1";
+				break;
+			case "UserInteractionComfort":
+				modifyCode[i] = "2";
+				break;
+			case "FileLoaderPower":
+				modifyCode[i] = "2";
+				break;
+			case "FileLoader":
+				modifyCode[i] = "1";
+				break;
+			case "Encoder":
+				modifyCode[i] = "1";
+				break;
+			case "EncoderPower":
 				modifyCode[i] = "2";
 				break;
 

@@ -135,7 +135,7 @@ public class EncogML {
 			System.out.println("correct ="+correct+"predict = "+irisChosen);
 		}
 	
-		double rp = CalculatePatameter.accuracy(realv, predv);
+		double rp = CalculatePatameter.rp(realv, predv);
 		    
 	    return rp;
 		

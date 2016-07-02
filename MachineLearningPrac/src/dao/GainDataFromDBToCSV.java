@@ -56,6 +56,7 @@ public class GainDataFromDBToCSV {
 			ResultSet rSet = prst.executeQuery();
 			List<String> codes = new ArrayList<>();
 			List<Float> restValues = new ArrayList<>();
+			int z=0;
 			while(rSet.next()){
 					String code = rSet.getString(fileds.get(0));
 					int length = code.trim().substring(1, code.length()-3).split(",").length;
@@ -63,6 +64,11 @@ public class GainDataFromDBToCSV {
 					codes.add(code);
 					float restValue = rSet.getFloat(fileds.get(1));
 					restValues.add(restValue);
+					
+					if(z>30001){
+						break;
+					}
+					z++;
 			}
 			
 			/*
@@ -108,7 +114,7 @@ public class GainDataFromDBToCSV {
 		List<String> fileds = new ArrayList<>();
 		fileds.add("Code");
 		fileds.add("RestValue");
-		String desCSVFilePath = FileNameUtil.getPrjPath()+"dataSource/stePCMData.csv";
+		String desCSVFilePath = FileNameUtil.getPrjPath()+"dataSource/ste.csv";
 		
 		GainDataFromDBToCSV gainDataFromDBToCSV = new GainDataFromDBToCSV();
 		gainDataFromDBToCSV.dbTocsv(sqlTxt, fileds, desCSVFilePath);
