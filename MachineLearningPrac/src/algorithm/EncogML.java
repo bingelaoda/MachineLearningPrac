@@ -81,8 +81,7 @@ public class EncogML {
 			// MLMethodFactor.TYPE_NEAT: NEAT Neural Network
 			// MLMethodFactor.TYPE_PNN: Probabilistic Neural Network
 			EncogModel model = new EncogModel(data);
-			model.selectMethod(data, MLMethodFactory.TYPE_NEAT);
-			
+			model.selectMethod(data, MLMethodFactory.TYPE_SVM);
 			// Send any output to the console.
 			model.setReport(new ConsoleStatusReportable());
 			

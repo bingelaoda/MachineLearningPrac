@@ -6,6 +6,6 @@
 	<classpathentry kind="lib" path="lib/opencsv-3.7.jar"/>
 	<classpathentry kind="lib" path="lib/mysql-connector-java.jar"/>
 	<classpathentry kind="lib" path="lib/jxl.jar"/>
-	<classpathentry kind="lib" path="lib/encog-core-3.3.0.jar"/>
+	<classpathentry kind="lib" path="lib/encog-core-3.3.0.jar" sourcepath="/encog-core"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
