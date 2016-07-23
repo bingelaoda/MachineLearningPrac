@@ -33,6 +33,23 @@ public class CalculatePatameter {
 		return accuracy;
 	}
 	
+	public static double claccuracy(List<Double> realValue,List<Double> predValue){
+		double value=-1;
+		int  mse = 0;
+		int  variance = 0;
+		for(int i=0;i<realValue.size();i++){
+			if(realValue.get(i).equals(predValue.get(i))){
+				mse++;
+			}
+			variance++;
+		}
+		
+		value = mse/variance;
+		
+		return value;
+		
+	}
+	
 	public static double rp(List<Double> realValue,List<Double> predValue){
 		int num1=0;
 		int num2=0;
