@@ -28,7 +28,7 @@ public class RamdomForestAlg {
 //				System.out.println(""+done(400, batchsize));
 //			}
 //		}
-	  done(200, 400);
+	  done(200, 100);
 		  
   }
   public static double done(int treesize,int batchsize){
@@ -42,7 +42,8 @@ public class RamdomForestAlg {
 //	  Instances trainData = new Instances(br);
       Instances trainData = null;
 	try {
-		trainData = DataSource.read(path+"doc\\train.csv");
+		System.out.println(path+"dataSource\\train.csv");
+		trainData = DataSource.read(path+"dataSource\\train.csv");
 	} catch (Exception e) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
@@ -61,7 +62,7 @@ public class RamdomForestAlg {
       
     Instances test = null;
 	try {
-		test = DataSource.read(path+"doc\\predict.csv");
+		test = DataSource.read(path+"dataSource\\predict.csv");
 	} catch (Exception e) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
