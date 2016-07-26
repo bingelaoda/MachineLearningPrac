@@ -2,10 +2,11 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.7"/>
-	<classpathentry kind="lib" path="lib/weka-3-7-13-monolithic.jar" sourcepath="weka"/>
+	<classpathentry kind="lib" path="lib/weka-3-7-13-monolithic.jar" sourcepath="dataSource/weka-3-9-0-monolithic.src"/>
 	<classpathentry kind="lib" path="lib/opencsv-3.7.jar"/>
 	<classpathentry kind="lib" path="lib/mysql-connector-java.jar"/>
 	<classpathentry kind="lib" path="lib/jxl.jar"/>
 	<classpathentry kind="lib" path="lib/encog-core-3.3.0.jar" sourcepath="/encog-core"/>
+	<classpathentry kind="lib" path="lib/weka-3-9-0-monolithic.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

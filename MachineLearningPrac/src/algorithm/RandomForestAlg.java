@@ -5,6 +5,7 @@ import java.util.List;
 
 import foundation.CalculateIndiceUtil.CalculatePatameter;
 import foundation.fileUtil.FileNameUtil;
+import weka.attributeSelection.SVMAttributeEval;
 import weka.classifiers.functions.RBFNetwork;
 import weka.classifiers.functions.supportVector.RegSMO;
 import weka.classifiers.functions.supportVector.RegSMOImproved;
@@ -82,13 +83,18 @@ public class RandomForestAlg {
 	  "Train and test set are not compatible: " + trainData.equalHeadersMsg(test));*/
     
     // train classifier
+//	RBFNetwork rf = new RBFNetwork();
     RandomForest rf = new RandomForest();
+	rf.setOptions(options);
 //    rf.setNumTrees(treesize);
 //    rf.setBatchSize(""+batchsize);
 //    rf.setNumDecimalPlaces(10);
     
     try {
+    	long start = System.currentTimeMillis();
 		rf.buildClassifier(trainData);
+		long end = System.currentTimeMillis();
+		System.out.println(end - start);
 	} catch (Exception e) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();

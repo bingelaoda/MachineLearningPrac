@@ -193,23 +193,23 @@ public class DbOperationUtil {
 	}
 	
 	public static void main(String[] args) throws Exception {
-//		File deleteFile  = new File("D:\\2.sql");
-//		if (deleteFile.exists()) {
-//			deleteFile.delete();
-//			System.out.println("delete File Succeed");
-//		}
-//		
-//		String path = "M:\\实验数据\\实验数据v0版\\EMSDE方法参数c=1\\pcs\\sql\\加代理模型\\yuce250 totalsize\\";
-//		ArrayList<String> fileNms = TxtFileUtil.findFileNms(path, ".sql");
-//		for(int i=0;i<fileNms.size();i++){
-//			out(path+fileNms.get(i));
-//			System.out.println("finish");
-//		}
+		File deleteFile  = new File("D:\\2.sql");
+		if (deleteFile.exists()) {
+			deleteFile.delete();
+			System.out.println("delete File Succeed");
+		}
+		
+		String path = "M:\\论文数据\\smmode\\pcs\\";
+		ArrayList<String> fileNms = TxtFileUtil.findFileNms(path, ".sql");
+		for(int i=0;i<fileNms.size();i++){
+			out(path+fileNms.get(i));
+			System.out.println("finish");
+		}
 		
 //		String sqlTxt1 = "Select distinct runid from t_run";
 //		outSingleFieldFromDB(sqlTxt1);
-		String sqlTxt = "SELECT * FROM t_run";
-		iteratorDefineValue(sqlTxt);
+//		String sqlTxt = "SELECT * FROM t_run";
+//		iteratorDefineValue(sqlTxt);
 		
 	}
 }

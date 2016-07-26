@@ -123,14 +123,10 @@ public class RWExcelFile {
 	            //获取Sheet表中所包含的总行数   
 	            int rsRows = st.getRows();
 	            
-	            if(RowIndex>rsColumns||RowIndex<1){
-	            	throw new RuntimeException ("要找的行数不存在");
-	            }
 	            //获取指定单元格的对象引用   
-	            for (int i = 0; i < rsRows; i++)   
+	            for (int i = 0; i < rsColumns; i++)   
 	            {   
                     Cell cell = st.getCell(i, RowIndex-1);
-                    System.out.println(cell.getContents());
                     dataSet.add(cell.getContents());
 	            }             
 	            //关闭   
@@ -349,8 +345,9 @@ public class RWExcelFile {
 		}
 	 
 	 public static void main(String[] args){
-		 List<String > list = readjxldefineColumn("D:\\a.xls","Sheet1",1);
-		 System.out.println(list);
-		 //		 readjxldefineRow("D:\\a.xls","Sheet1",1);
+//		 List<String> list = readjxldefineColumn("D:\\a.xls","Sheet1",1);
+//		 System.out.println(list);
+		 List<String> list = readjxldefineRow("D:\\a.xls","Sheet1",1);
+		 
 	 }
 }

@@ -110,11 +110,11 @@ public class GainDataFromDBToCSV {
 	}
 
 	public static void main(String[] args){
-		String sqlTxt = "select * from t_run";
+		String sqlTxt = "select * from t_temp_run";
 		List<String> fileds = new ArrayList<>();
 		fileds.add("Code");
 		fileds.add("RestValue");
-		String desCSVFilePath = FileNameUtil.getPrjPath()+"dataSource/ste.csv";
+		String desCSVFilePath = FileNameUtil.getPrjPath()+"dataSource/brsLatin.csv";
 		
 		GainDataFromDBToCSV gainDataFromDBToCSV = new GainDataFromDBToCSV();
 		gainDataFromDBToCSV.dbTocsv(sqlTxt, fileds, desCSVFilePath);

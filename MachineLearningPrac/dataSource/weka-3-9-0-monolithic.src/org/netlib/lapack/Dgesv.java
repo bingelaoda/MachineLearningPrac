@@ -1,0 +1,36 @@
+package org.netlib.lapack;
+
+import org.netlib.err.Xerbla;
+import org.netlib.util.intW;
+
+public final class Dgesv
+{
+  public static void dgesv(int paramInt1, int paramInt2, double[] paramArrayOfDouble1, int paramInt3, int paramInt4, int[] paramArrayOfInt, int paramInt5, double[] paramArrayOfDouble2, int paramInt6, int paramInt7, intW paramintW)
+  {
+    paramintW.val = 0;
+    if ((paramInt1 >= 0 ? 0 : 1) != 0) {
+      paramintW.val = -1;
+    } else if ((paramInt2 >= 0 ? 0 : 1) != 0) {
+      paramintW.val = -2;
+    } else if ((paramInt4 >= Math.max(1, paramInt1) ? 0 : 1) != 0) {
+      paramintW.val = -4;
+    } else if ((paramInt7 >= Math.max(1, paramInt1) ? 0 : 1) != 0) {
+      paramintW.val = -7;
+    }
+    if ((paramintW.val == 0 ? 0 : 1) != 0)
+    {
+      Xerbla.xerbla("DGESV ", -paramintW.val);
+      return;
+    }
+    Dgetrf.dgetrf(paramInt1, paramInt1, paramArrayOfDouble1, paramInt3, paramInt4, paramArrayOfInt, paramInt5, paramintW);
+    if ((paramintW.val != 0 ? 0 : 1) != 0) {
+      Dgetrs.dgetrs("No transpose", paramInt1, paramInt2, paramArrayOfDouble1, paramInt3, paramInt4, paramArrayOfInt, paramInt5, paramArrayOfDouble2, paramInt6, paramInt7, paramintW);
+    }
+  }
+}
+
+
+/* Location:           C:\Users\Administrator\Desktop\weka-3-9-0-monolithic.jar
+ * Qualified Name:     org.netlib.lapack.Dgesv
+ * JD-Core Version:    0.7.0.1
+ */
