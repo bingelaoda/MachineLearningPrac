@@ -9,7 +9,7 @@ import algorithm.RF;
  * @author wuxb
  *
  */
-public class RFExcute extends Main {
+public class RFExcute extends Excute {
 	private List<Long> trainTime;
 	private List<Long> predTime;
 	private List<Double> rp;
@@ -66,21 +66,21 @@ public class RFExcute extends Main {
 	}
 	
 	public void run(){
-		RFExcute plan = new RFExcute();
+		RFExcute rfExcute = new RFExcute();
 		String algNM="brs";
-		plan.excute(algNM);
+		rfExcute.excute(algNM);
 		double bestRP = 0d;
 		int cursor = 0;
-		for (int i = 0; i < plan.getRp().size(); i++) {
-			double rp = plan.getRp().get(i);
+		for (int i = 0; i < rfExcute.getRp().size(); i++) {
+			double rp = rfExcute.getRp().get(i);
 			if (rp<bestRP) {
 				bestRP = rp;
 				cursor = i;
 			}
 		}
-		System.out.println("BestRp"+plan.getRp().get(cursor));
-		System.out.println(plan.getTrainTime().get(cursor));
-		System.out.println(plan.getPredTime().get(cursor));
-		System.out.println(plan.getParams().get(cursor));
+		System.out.println("BestRp"+rfExcute.getRp().get(cursor));
+		System.out.println(rfExcute.getTrainTime().get(cursor));
+		System.out.println(rfExcute.getPredTime().get(cursor));
+//		System.out.println(rfExcute.getParams().get(cursor));
 	}
 }

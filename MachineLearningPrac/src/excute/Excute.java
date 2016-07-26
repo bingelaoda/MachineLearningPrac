@@ -1,6 +1,6 @@
 package excute;
 
-public abstract class Main {
+public abstract class Excute {
 
 	public abstract void run();
 }

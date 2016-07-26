@@ -10,7 +10,7 @@ import algorithm.SVMREG;
  * @author wuxb
  *
  */
-public class SVMregExcute extends Main {
+public class SVMregExcute extends Excute {
 	
 	private List<Long> trainTime;
 	private List<Long> predTime;
