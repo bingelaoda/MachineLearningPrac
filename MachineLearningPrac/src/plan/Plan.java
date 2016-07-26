@@ -1,5 +1,7 @@
 package plan;
 
+
+import randomForest.RamdomForestAlg;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
@@ -12,7 +14,6 @@ import algorithm.EncogML;
 import algorithm.RandomForestAlg;
 import foundation.fileUtil.FileNameUtil;
 import foundation.fileUtil.RWCsvFileUtil;
-
 /**
  * 
  * @author wuxb
@@ -21,7 +22,12 @@ import foundation.fileUtil.RWCsvFileUtil;
 public class Plan {
 
 	public void excute(){
-		
+		RamdomForestAlg.done(100,100);
+	}
+	
+	public static void main(String[] args){
+		Plan plan = new Plan();
+		plan.excute();
 		List<Double> rfs = new ArrayList<>();
 		for(int i=0;i<50;i++){
 			String algNM = "brs";
@@ -71,13 +77,4 @@ public class Plan {
 //		}
 //		
 //	}
-	public static void main(String[] args){
-		long start  = System.currentTimeMillis();
-		Plan plan = new Plan();
-		plan.excute();
-		
-		long end = System.currentTimeMillis();
-		
-//		System.out.println((end-start));
-	}
 }
