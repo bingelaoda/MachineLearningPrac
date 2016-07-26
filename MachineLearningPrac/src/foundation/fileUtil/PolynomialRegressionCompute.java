@@ -20,7 +20,7 @@ public class PolynomialRegressionCompute {
 		
 		List<Double> realy = new ArrayList<>();
 		List<Double> predy = new ArrayList<>();
-		
+		long predictStart = System.currentTimeMillis();
 		for(int i=0;i<datas.size();i++){
 			List<Double> data = datas.get(i);
 			
@@ -42,6 +42,7 @@ public class PolynomialRegressionCompute {
 			double truey = data.get(14);
 			
 			//将data带入公式了
+			
 			double predicty = -0.0268 * x1 +
 						     -0.0089 * x2 +
 						     -0.0121 * x4 +
@@ -93,8 +94,9 @@ public class PolynomialRegressionCompute {
 			realy.add(truey);
 			predy.add(predicty);
 		}
-		
+		long predictEnd = System.currentTimeMillis();
 		double rp = CalculatePatameter.rp(realy, predy);
+		System.out.println(predictEnd-predictStart);
 		System.out.println(rp);
 	}
 	
@@ -112,7 +114,6 @@ public class PolynomialRegressionCompute {
 		String filePathString = "C:\\Users\\Administrator\\Desktop\\Latin sample\\brsLatinTest.xls";
 		String sheetName="brsLatinTest";
 		int rowNum = 800;
-		
 		PolynomialRegressionCompute pRegCom = new PolynomialRegressionCompute();
 		List<List<String>> strs = pRegCom.gainDatafromCSV(filePathString, sheetName, rowNum);
 		pRegCom.polynomialRegressionCompute(strs);
