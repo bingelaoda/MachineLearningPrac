@@ -5,9 +5,6 @@ import java.util.List;
 
 import foundation.CalculateIndiceUtil.CalculatePatameter;
 import foundation.fileUtil.FileNameUtil;
-import weka.classifiers.functions.SMOreg;
-import weka.classifiers.functions.supportVector.Kernel;
-import weka.classifiers.functions.supportVector.RegOptimizer;
 import weka.classifiers.trees.RandomForest;
 import weka.core.Instances;
 import weka.core.converters.ConverterUtils.DataSource;
@@ -17,21 +14,14 @@ public class RF {
 	 * rp值
 	 * 训练时间  trainTimeConsume
 	 * 预测时间  PredictTimeConsume
-	 * 三个算法参数 C Gamma tolerance
 	*/
 	
-	private double C;
-	private double Gamma;
-	private double toler;
 	private long trainTimeConsuming;
 	private long predTimeConsuming;
 	private double rp;
 	private String algNM;
 	
-	public RF(double C,double Gamma,double toler,String algNM){
-		this.C = C;
-		this.Gamma = Gamma;
-		this.toler = toler;
+	public RF(String algNM){
 		this.algNM = algNM;
 	}
 	public long getTrainTimeConsuming() {
@@ -50,29 +40,6 @@ public class RF {
 		this.algNM = algNM;
 	}
 
-	public double getC() {
-		return C;
-	}
-
-	public void setC(double c) {
-		C = c;
-	}
-
-	public double getGamma() {
-		return Gamma;
-	}
-
-	public void setGamma(double gamma) {
-		Gamma = gamma;
-	}
-
-	public double getToler() {
-		return toler;
-	}
-
-	public void setToler(double toler) {
-		this.toler = toler;
-	}
 
 	public long getPredTimeConsuming() {
 		return predTimeConsuming;
