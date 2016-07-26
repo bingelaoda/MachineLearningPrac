@@ -2,14 +2,13 @@ package algorithm;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import foundation.CalculateIndiceUtil.CalculatePatameter;
 import foundation.fileUtil.FileNameUtil;
-import weka.classifiers.trees.RandomForest;
+import weka.classifiers.functions.RBFNetwork;
 import weka.core.Instances;
 import weka.core.converters.ConverterUtils.DataSource;
 
-public class RF {
+public class RBFN {
 	/*根据给定的样本进行训练，根据给的样本进行预测，并且返回
 	 * rp值
 	 * 训练时间  trainTimeConsume
@@ -19,9 +18,16 @@ public class RF {
 	private long trainTimeConsuming;
 	private long predTimeConsuming;
 	private double rp;
+	private int centerNum;
 	private String algNM;
 	
-	public RF(String algNM){
+	public int getCenterNum() {
+		return centerNum;
+	}
+	public void setCenterNum(int centerNum) {
+		this.centerNum = centerNum;
+	}
+	public RBFN(String algNM){
 		this.algNM = algNM;
 	}
 	public long getTrainTimeConsuming() {
@@ -83,16 +89,27 @@ public class RF {
 		/*
 		 * 修改参数C的值
 		 */
-		RandomForest randomForest = new RandomForest();
+		RBFNetwork rbfNetwork = new RBFNetwork();
+		String[] modifyOptions=new String[10];
+		modifyOptions[0] = "-B";
+		modifyOptions[0] = ""+centerNum;
+		modifyOptions[0] = "-S";
+		modifyOptions[0] = "1";
+		modifyOptions[0] = "-R";
+		modifyOptions[0] = "1.0E-8";
+		modifyOptions[0] = "-M";
+		modifyOptions[0] = "-1";
+		modifyOptions[0] = "-W";
+		modifyOptions[0] = "0.1";
 //		try {
 //			svm.setOptions(options);
 //		} catch (Exception e1) {
 //			e1.printStackTrace();
 //		}
-		String[] option1 = randomForest.getOptions();
-		for (int i = 0; i < option1.length; i++) {
-			System.out.println(option1[i]);
-		}
+//		String[] option1 = rbfNetwork.getOptions();
+//		for (int i = 0; i < option1.length; i++) {
+//			System.out.println(option1[i]);
+//		}
 		
 		
 //		修改Gamma参数
@@ -139,7 +156,7 @@ public class RF {
 		
 	    try {
 	    	long trainStart = System.currentTimeMillis();
-			randomForest.buildClassifier(trainData);
+			rbfNetwork.buildClassifier(trainData);
 			long trainEnd = System.currentTimeMillis();
 			long trainTimeConsuming = trainEnd-trainStart;
 			setTrainTimeConsuming(trainTimeConsuming);
@@ -155,7 +172,7 @@ public class RF {
 	    	double predValue=0;
 			try {
 				long predOnceStartTime = System.currentTimeMillis();
-				predValue = randomForest.classifyInstance(testData.instance(i));
+				predValue = rbfNetwork.classifyInstance(testData.instance(i));
 				long predOneceEndTime = System.currentTimeMillis();
 				predTime += predOneceEndTime-predOnceStartTime; 
 			} catch (Exception e) {
@@ -176,3 +193,4 @@ public class RF {
 	    setRp(rp);
 	}
 }
+

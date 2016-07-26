@@ -2,27 +2,26 @@ package excute;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import algorithm.RBFN;
 /**
  * 
  * @author wuxb
  *
  */
-public class RFExcute extends Excute {
+public class RBFNExcute extends Excute {
 	private List<Long> trainTime;
 	private List<Long> predTime;
 	private List<Double> rp;
-	public List<List<Double>> getParams() {
+	private List<Integer> params;
+
+	public List<Integer> getParams() {
 		return params;
 	}
 
-	public void setParams(List<List<Double>> params) {
+	public void setParams(List<Integer> params) {
 		this.params = params;
 	}
 
-	private List<List<Double>> params;
-	
 	public List<Long> getTrainTime() {
 		return trainTime;
 	}
@@ -47,18 +46,22 @@ public class RFExcute extends Excute {
 		this.rp = rp;
 	}
 
-	public void excute(String algNM){
+	public void excute(List<Integer> K,String algNM){
 		List<Long> trainTime = new ArrayList<>();
 		List<Long> predTime = new ArrayList<>();
 		List<Double> rp = new ArrayList<>();
-		List<List<Double>> params = new ArrayList<>();
+		List<Integer> params = new ArrayList<>();
 		RBFN rbfn = new RBFN(algNM);
-		rbfn.trainAndPredict();
-		trainTime.add(rbfn.getTrainTimeConsuming());
-		predTime.add(rbfn.getPredTimeConsuming());
-		rp.add(rbfn.getRp());
-//		List<Double> param = new ArrayList<>();
-//		params.add(param);
+		for (int i = 0; i < K.size(); i++) {
+			rbfn.setCenterNum(K.get(i));
+			rbfn.trainAndPredict();
+			trainTime.add(rbfn.getTrainTimeConsuming());
+			predTime.add(rbfn.getPredTimeConsuming());
+			rp.add(rbfn.getRp());
+			params.add(K.get(i));
+		}
+		
+	
 		setTrainTime(trainTime);
 		setPredTime(predTime);
 		setRp(rp);
@@ -66,9 +69,13 @@ public class RFExcute extends Excute {
 	}
 	
 	public void run(){
-		RFExcute rfExcute = new RFExcute();
+		RBFNExcute rfExcute = new RBFNExcute();
 		String algNM="brs";
-		rfExcute.excute(algNM);
+		List<Integer> K = new ArrayList<>();
+		for(int i=1;i<20;i++){
+			K.add(i+1);
+		}
+		rfExcute.excute(K,algNM);
 		double bestRP = 0d;
 		int cursor = 0;
 		for (int i = 0; i < rfExcute.getRp().size(); i++) {
@@ -81,6 +88,6 @@ public class RFExcute extends Excute {
 		System.out.println("BestRp"+rfExcute.getRp().get(cursor));
 		System.out.println(rfExcute.getTrainTime().get(cursor));
 		System.out.println(rfExcute.getPredTime().get(cursor));
-//		System.out.println(rfExcute.getParams().get(cursor));
+		System.out.println(rfExcute.getParams().get(cursor));
 	}
 }
