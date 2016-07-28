@@ -3,6 +3,8 @@ package algorithm;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.netlib.util.intW;
+
 import foundation.CalculateIndiceUtil.CalculatePatameter;
 import foundation.fileUtil.FileNameUtil;
 import weka.classifiers.trees.RandomForest;
@@ -20,9 +22,26 @@ public class RF {
 	private long predTimeConsuming;
 	private double rp;
 	private String algNM;
+	private int newNumTrees;
+	public int getNewNumTrees() {
+		return newNumTrees;
+	}
+	public void setNewNumTrees(int newNumTrees) {
+		this.newNumTrees = newNumTrees;
+	}
+	public int getNewNumFeatures() {
+		return newNumFeatures;
+	}
+	public void setNewNumFeatures(int newNumFeatures) {
+		this.newNumFeatures = newNumFeatures;
+	}
+
+	private int newNumFeatures;
 	
-	public RF(String algNM){
+	public RF(String algNM,int newNumTrees,int newNumFeatures){
 		this.algNM = algNM;
+		this.newNumTrees = newNumTrees;
+		this.newNumFeatures = newNumFeatures;
 	}
 	public long getTrainTimeConsuming() {
 		return trainTimeConsuming;
@@ -80,19 +99,18 @@ public class RF {
 			e.printStackTrace();
 		}
 		testData.setClassIndex(testData.numAttributes() - 1);
-		/*
-		 * 修改参数C的值
-		 */
 		RandomForest randomForest = new RandomForest();
+		randomForest.setNumTrees(newNumTrees);
+		randomForest.setNumFeatures(newNumFeatures);
 //		try {
 //			svm.setOptions(options);
 //		} catch (Exception e1) {
 //			e1.printStackTrace();
 //		}
-		String[] option1 = randomForest.getOptions();
-		for (int i = 0; i < option1.length; i++) {
-			System.out.println(option1[i]);
-		}
+//		String[] option1 = randomForest.getOptions();
+//		for (int i = 0; i < option1.length; i++) {
+//			System.out.println(option1[i]);
+//		}
 		
 		
 //		修改Gamma参数

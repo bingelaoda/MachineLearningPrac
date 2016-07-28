@@ -114,7 +114,7 @@ public class GainDataFromDBToCSV {
 		List<String> fileds = new ArrayList<>();
 		fileds.add("Code");
 		fileds.add("RestValue");
-		String desCSVFilePath = FileNameUtil.getPrjPath()+"dataSource/brsLatin.csv";
+		String desCSVFilePath = FileNameUtil.getPrjPath()+"dataSource/steLatin.csv";
 		
 		GainDataFromDBToCSV gainDataFromDBToCSV = new GainDataFromDBToCSV();
 		gainDataFromDBToCSV.dbTocsv(sqlTxt, fileds, desCSVFilePath);

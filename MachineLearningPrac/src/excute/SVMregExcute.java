@@ -82,16 +82,16 @@ public class SVMregExcute extends Excute {
 		List<Double> C_Param = new ArrayList<>();
 		List<Double> Gamma_Param = new ArrayList<>();
 		List<Double> toler_Param = new ArrayList<>();
-		for(int i=-5;i<16;i++){
+		for(int i=-5;i<-4;i++){
 			C_Param.add(Math.pow(2, i));
 		}
-		for (int i = 1; i < 21; i++) {
+		for (int i = 1; i < 2; i++) {
 			Gamma_Param.add(i*0.1);
 		}
-		for (int i = -10; i < 6; i++) {
+		for (int i = -10; i < -9; i++) {
 			toler_Param.add(Math.pow(2, i));
 		}
-		String algNM="brs";
+		String algNM="ste";
 		plan.excute(C_Param,Gamma_Param,toler_Param,algNM);
 		double bestRP = 0d;
 		int cursor = 0;

@@ -70,7 +70,7 @@ public class RBFNExcute extends Excute {
 	
 	public void run(){
 		RBFNExcute rfExcute = new RBFNExcute();
-		String algNM="brs";
+		String algNM="ste";
 		List<Integer> K = new ArrayList<>();
 		for(int i=1;i<20;i++){
 			K.add(i+1);

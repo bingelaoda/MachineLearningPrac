@@ -212,7 +212,6 @@ public class SVMREG {
 	    /*
 	     * 存储RP值
 	     */
-	    
 	    double rp = CalculatePatameter.rp(realv, predv);
 	    setRp(rp);
 	}
