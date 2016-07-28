@@ -2,7 +2,7 @@ package randomForest;
 
 import java.util.ArrayList;
 import java.util.List;
-import foundation.CalculateIndiceUtil.CalculatePatameter;
+import foundation.CalculateIndiceUtil.CalculateIndice;
 import foundation.fileUtil.FileNameUtil;
 import weka.classifiers.trees.RandomForest;
 import weka.core.Instances;
@@ -129,8 +129,8 @@ public class RamdomForestAlg {
 //      System.out.print(Utils.arrayToString(dist));
       System.out.println();
     }
-    double accuracy = CalculatePatameter.accuracy(realv, predv);
-    double rp = CalculatePatameter.rp(realv, predv);
+    double accuracy = CalculateIndice.accuracy(realv, predv);
+    double rp = CalculateIndice.rp(realv, predv);
     
     System.out.println("Accuracy"+accuracy);
     System.out.println("rp"+rp);

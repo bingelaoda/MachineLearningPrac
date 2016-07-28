@@ -2,7 +2,7 @@ package algorithm;
 
 import java.util.ArrayList;
 import java.util.List;
-import foundation.CalculateIndiceUtil.CalculatePatameter;
+import foundation.CalculateIndiceUtil.CalculateIndice;
 import foundation.fileUtil.FileNameUtil;
 import weka.classifiers.functions.RBFNetwork;
 import weka.core.Instances;
@@ -189,7 +189,7 @@ public class RBFN {
 	     * 存储RP值
 	     */
 	    
-	    double rp = CalculatePatameter.rp(realv, predv);
+	    double rp = CalculateIndice.rp(realv, predv);
 	    setRp(rp);
 	}
 }

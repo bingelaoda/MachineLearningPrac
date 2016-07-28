@@ -5,11 +5,11 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 /**
- * 
+ * 计算指标，比如RP ，Accuracy
  * @author wuxb
  *
  */
-public class CalculatePatameter {
+public class CalculateIndice {
 	/**
 	 * 
 	 * @param realValue	真实值

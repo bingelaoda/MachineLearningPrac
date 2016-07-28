@@ -19,7 +19,7 @@ import org.encog.ml.model.EncogModel;
 import org.encog.util.csv.CSVFormat;
 import org.encog.util.csv.ReadCSV;
 
-import foundation.CalculateIndiceUtil.CalculatePatameter;
+import foundation.CalculateIndiceUtil.CalculateIndice;
 
 public class EncogML {
 	
@@ -134,7 +134,7 @@ public class EncogML {
 			System.out.println("correct ="+correct+"predict = "+irisChosen);
 		}
 	
-		double rp = CalculatePatameter.rp(realv, predv);
+		double rp = CalculateIndice.rp(realv, predv);
 		    
 	    return rp;
 		

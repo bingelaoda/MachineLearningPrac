@@ -5,7 +5,7 @@ import java.util.List;
 
 import org.netlib.util.doubleW;
 
-import foundation.CalculateIndiceUtil.CalculatePatameter;
+import foundation.CalculateIndiceUtil.CalculateIndice;
 
 public class PolynomialRegressionCompute {
 	public void polynomialRegressionCompute(List<List<String>> strs){
@@ -73,7 +73,7 @@ public class PolynomialRegressionCompute {
 			predy.add(predicty);
 		}
 		long predictEnd = System.currentTimeMillis();
-		double rp = CalculatePatameter.rp(realy, predy);
+		double rp = CalculateIndice.rp(realy, predy);
 		System.out.println(predictEnd-predictStart);
 		System.out.println(rp);
 	}

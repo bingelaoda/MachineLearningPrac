@@ -5,7 +5,7 @@ import java.util.List;
 
 import org.netlib.util.intW;
 
-import foundation.CalculateIndiceUtil.CalculatePatameter;
+import foundation.CalculateIndiceUtil.CalculateIndice;
 import foundation.fileUtil.FileNameUtil;
 import weka.classifiers.trees.RandomForest;
 import weka.core.Instances;
@@ -190,7 +190,7 @@ public class RF {
 	     * 存储RP值
 	     */
 	    
-	    double rp = CalculatePatameter.rp(realv, predv);
+	    double rp = CalculateIndice.rp(realv, predv);
 	    setRp(rp);
 	}
 }
