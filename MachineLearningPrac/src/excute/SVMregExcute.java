@@ -77,7 +77,7 @@ public class SVMregExcute extends Excute {
 		setParams(params);
 	}
 	
-	public void run(){
+	public void run(String caseNM){
 		SVMregExcute plan = new SVMregExcute();
 		List<Double> C_Param = new ArrayList<>();
 		List<Double> Gamma_Param = new ArrayList<>();
@@ -91,8 +91,7 @@ public class SVMregExcute extends Excute {
 		for (int i = -10; i < -9; i++) {
 			toler_Param.add(Math.pow(2, i));
 		}
-		String algNM="ste";
-		plan.excute(C_Param,Gamma_Param,toler_Param,algNM);
+		plan.excute(C_Param,Gamma_Param,toler_Param,caseNM);
 		double bestRP = 0d;
 		int cursor = 0;
 		for (int i = 0; i < plan.getRp().size(); i++) {

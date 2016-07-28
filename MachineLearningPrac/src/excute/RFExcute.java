@@ -73,9 +73,8 @@ public class RFExcute extends Excute {
 		setParams(params);
 	}
 	
-	public void run(){
+	public void run(String caseNM){
 		RFExcute rfExcute = new RFExcute();
-		String algNM="ste";
 		List<Integer> newNumTrees = new ArrayList<>();
 		List<Integer> newNumFeatures = new ArrayList<>();
 		for (int i = 1; i < 20; i++) {
@@ -84,7 +83,7 @@ public class RFExcute extends Excute {
 		for (int i = 2; i < 10; i++) {
 			newNumFeatures.add(i);
 		}
-		rfExcute.excute(newNumTrees,newNumFeatures,algNM);
+		rfExcute.excute(newNumTrees,newNumFeatures,caseNM);
 		for (int i = 0; i < rfExcute.getRp().size(); i++) {
 			System.out.println(rfExcute.getRp().get(i));
 			System.out.println(rfExcute.getTrainTime().get(i));

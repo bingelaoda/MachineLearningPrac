@@ -68,14 +68,13 @@ public class RBFNExcute extends Excute {
 		setParams(params);
 	}
 	
-	public void run(){
+	public void run(String caseNM){
 		RBFNExcute rfExcute = new RBFNExcute();
-		String algNM="ste";
 		List<Integer> K = new ArrayList<>();
 		for(int i=1;i<20;i++){
 			K.add(i+1);
 		}
-		rfExcute.excute(K,algNM);
+		rfExcute.excute(K,caseNM);
 		double bestRP = 0d;
 		int cursor = 0;
 		for (int i = 0; i < rfExcute.getRp().size(); i++) {
