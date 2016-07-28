@@ -11,7 +11,6 @@ import java.util.List;
  */
 public class CalculateIndice {
 	/**
-	 * 
 	 * @param realValue	真实值
 	 * @param predValue 预测值
 	 * @return
