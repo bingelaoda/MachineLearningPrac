@@ -4,7 +4,7 @@ import excute.RBFNExcute;
 import excute.RFExcute;
 import excute.SVMregExcute;
 
-public class Plan {
+public class Main {
 	public static void main(String[] args){
 		String caseNM = "";
 		
