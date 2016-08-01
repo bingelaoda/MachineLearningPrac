@@ -69,7 +69,6 @@ public class SVMregExcute extends Excute {
 					params.add(param);
 				}
 			}
-			System.out.println(i);
 		}
 		setTrainTime(trainTime);
 		setPredTime(predTime);
@@ -78,7 +77,7 @@ public class SVMregExcute extends Excute {
 	}
 	
 	public void run(String caseNM){
-		SVMregExcute plan = new SVMregExcute();
+		SVMregExcute svMregExcute = new SVMregExcute();
 		List<Double> C_Param = new ArrayList<>();
 		List<Double> Gamma_Param = new ArrayList<>();
 		List<Double> toler_Param = new ArrayList<>();
@@ -91,19 +90,19 @@ public class SVMregExcute extends Excute {
 		for (int i = -10; i < -9; i++) {
 			toler_Param.add(Math.pow(2, i));
 		}
-		plan.excute(C_Param,Gamma_Param,toler_Param,caseNM);
+		svMregExcute.excute(C_Param,Gamma_Param,toler_Param,caseNM);
 		double bestRP = 0d;
 		int cursor = 0;
-		for (int i = 0; i < plan.getRp().size(); i++) {
-			double rp = plan.getRp().get(i);
+		for (int i = 0; i < svMregExcute.getRp().size(); i++) {
+			double rp = svMregExcute.getRp().get(i);
 			if (rp<bestRP) {
 				bestRP = rp;
 				cursor = i;
 			}
 		}
-		System.out.println("BestRp"+plan.getRp().get(cursor));
-		System.out.println(plan.getTrainTime().get(cursor));
-		System.out.println(plan.getPredTime().get(cursor));
-		System.out.println(plan.getParams().get(cursor));
+		System.out.println("BestRp"+svMregExcute.getRp().get(cursor));
+		System.out.println(svMregExcute.getTrainTime().get(cursor));
+		System.out.println(svMregExcute.getPredTime().get(cursor));
+		System.out.println(svMregExcute.getParams().get(cursor));
 	}
 }
