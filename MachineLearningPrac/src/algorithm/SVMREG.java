@@ -90,24 +90,26 @@ public class SVMREG {
 	}
 
 	public void trainAndPredict(){
+		String trainSetPath = FileNameUtil.getPrjPath()+"dataSource\\"+algNM+"LatinTrain.csv";
+		String predSetPath = FileNameUtil.getPrjPath()+"dataSource\\"+algNM+"LatinPredict.csv";
 		/*
-		 * 准备训练数据
+		 * 输入数据集
 		 */
-		String path = FileNameUtil.getPrjPath();
 		Instances trainData = null;
 		try {
-			trainData = DataSource.read(path+"dataSource\\"+algNM+"LatinTrain.csv");
+			trainData = DataSource.read(trainSetPath);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	 
+		//设置目标属性位
 		trainData.setClassIndex(trainData.numAttributes() - 1);
 		/*
 		 * 准备测试数据
 		 */
 		Instances testData = null;
 		try {
-			testData = DataSource.read(path+"dataSource\\"+algNM+"LatinPredict.csv");
+			testData = DataSource.read(predSetPath);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -115,7 +117,13 @@ public class SVMREG {
 		/*
 		 * 修改参数C的值
 		 */
+		
+		//实例化选用的机器学习算法
 		SMOreg svm = new SMOreg();
+		
+		/*
+		 * 参数设定
+		 */
 		String[] options = new String[8];
 		options[0] ="-C";
 		options[1] = ""+C;
@@ -139,10 +147,6 @@ public class SVMREG {
 		 * 修改Gamma参数
 		 */
 		Kernel kernel = svm.getKernel();
-//		String[] kernerOptionStrings=kernel.getOptions();
-//		for(int i=0;i<kernerOptionStrings.length;i++){
-//			System.out.println("ker"+kernerOptionStrings[i]);
-//		}
 		String[] modifyKernelOpt = new String[4];
 		modifyKernelOpt[0] = "-G";
 		modifyKernelOpt[1] = ""+Gamma;
@@ -157,10 +161,6 @@ public class SVMREG {
 		 * 修改Tolerance参数
 		 */
 		RegOptimizer regOptimizer = svm.getRegOptimizer();
-//		String[] regOption = regOptimizer.getOptions();
-//		for (int i = 0; i < regOption.length; i++) {
-//			System.out.println(regOption[i]);
-//		}
 		String[] modifyregOption = new String[9];
 		modifyregOption[0] = "-T";
 		modifyregOption[1] = ""+toler;
@@ -177,10 +177,13 @@ public class SVMREG {
 		} catch (Exception e1) {
 			e1.printStackTrace();
 		}
-		
+		/*
+		 * 开始进行训练，并且记录训练消耗时间
+		 */
 	    try {
 	    	long trainStart = System.currentTimeMillis();
-			svm.buildClassifier(trainData);
+			//训练进行建模
+	    	svm.buildClassifier(trainData);
 			long trainEnd = System.currentTimeMillis();
 			long trainTimeConsuming = trainEnd-trainStart;
 			setTrainTimeConsuming(trainTimeConsuming);
@@ -191,11 +194,16 @@ public class SVMREG {
 	    List<Double> realv = new ArrayList<>();
 	    List<Double> predv = new ArrayList<>();
 	    long predTime = 0;
-	    for (int i =0 ; i < testData.size(); i++) {
+	    int testDataSize = testData.size();
+	    
+	    
+	    //测试并且记录测试所用时间
+	    for (int i =0 ; i < testDataSize; i++) {
 	    	double realValue = Double.parseDouble(testData.instance(i).toString(testData.classIndex()));
 	    	double predValue=0;
 			try {
 				long predOnceStartTime = System.currentTimeMillis();
+				//进行测试
 				predValue = svm.classifyInstance(testData.instance(i));
 				long predOneceEndTime = System.currentTimeMillis();
 				predTime += predOneceEndTime-predOnceStartTime; 
