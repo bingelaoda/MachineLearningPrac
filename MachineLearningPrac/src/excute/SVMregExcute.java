@@ -91,7 +91,10 @@ public class SVMregExcute extends Excute {
 			toler_Param.add(Math.pow(2, i));
 		}
 		svMregExcute.excute(C_Param,Gamma_Param,toler_Param,caseNM);
-		double bestRP = 0d;
+		/*
+		 *输出最优模型
+		 */
+		double bestRP = Double.MAX_VALUE;
 		int cursor = 0;
 		for (int i = 0; i < svMregExcute.getRp().size(); i++) {
 			double rp = svMregExcute.getRp().get(i);
