@@ -5,14 +5,14 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 /**
- * 计算指标，比如RP ，Accuracy
+ * 璁＄畻鎸囨爣锛屾瘮濡俁P 锛孉ccuracy
  * @author wuxb
  *
- */
+ */  
 public class CalculateIndice {
 	/**
-	 * @param realValue	真实值
-	 * @param predValue 预测值
+	 * @param realValue	鐪熷疄鍊�
+	 * @param predValue 棰勬祴鍊�
 	 * @return
 	 */
 	public static double accuracy(List<Double> realValue,List<Double> predValue){
