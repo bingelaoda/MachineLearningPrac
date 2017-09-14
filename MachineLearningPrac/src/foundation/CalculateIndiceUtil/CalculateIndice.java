@@ -17,7 +17,7 @@ public class   CalculateIndice {
 	 * 
 	 * 
 	 */
-	public static double accuracy(List<Double> realValue,List<Double> predValue){
+	public static   double  accuracy(List<Double> realValue,List<Double> predValue){
 		double mse =  0;
 		double variance = 0;
 		double mean = 0;
