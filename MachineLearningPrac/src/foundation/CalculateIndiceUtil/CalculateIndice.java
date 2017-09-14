@@ -9,14 +9,16 @@ import java.util.List;
  * @author wuxb
  *
  */  
-public class CalculateIndice {
+public class   CalculateIndice {
 	/**
 	 * @param realValue	鐪熷疄鍊�
 	 * @param predValue 棰勬祴鍊�
 	 * @return
+	 * 
+	 * 
 	 */
 	public static double accuracy(List<Double> realValue,List<Double> predValue){
-		double mse = 0;
+		double mse =  0;
 		double variance = 0;
 		double mean = 0;
 		for (int i = 0; i < realValue.size(); i++) {
